@@ -1,0 +1,82 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+button, input {
+  margin: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+}
+
+button {
+  background: #0ff;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: #0cf;
+}
+
+.timer {
+  background: #222;
+  border: 1px solid #444;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 10px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.timer.alarming {
+  animation: flash-border 1s infinite;
+}
+
+@keyframes flash-border {
+  0% { box-shadow: 0 0 10px 2px red; }
+  50% { box-shadow: 0 0 20px 4px yellow; }
+  100% { box-shadow: 0 0 10px 2px red; }
+}
+
+.timer input[type="text"] {
+  margin-bottom: 8px;
+  width: 75%;
+  padding: 6px;
+  border-radius: 6px;
+  border: none;
+}
+
+.time-inputs {
+  display: flex;
+  gap: 5px;
+}
+
+.time-inputs input {
+  width: 60px;
+  text-align: center;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #f00;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+}
