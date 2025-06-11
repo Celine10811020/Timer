@@ -47,13 +47,16 @@ function createTimer() {
   display.style.marginTop = '10px';
   display.innerText = '⏱ 00:00';
 
-  let interval, remaining, originalTime;
+  let interval, endTime, originalTime;
   let alarmAudio = null;
 
   function updateDisplay() {
+    const now = Date.now();
+    let remaining = Math.max(0, Math.round((endTime - now) / 1000));
     const min = String(Math.floor(remaining / 60)).padStart(2, '0');
     const sec = String(remaining % 60).padStart(2, '0');
     display.innerText = `⏱ ${min}:${sec}`;
+    return remaining;
   }
 
   startBtn.onclick = () => {
@@ -65,7 +68,7 @@ function createTimer() {
         alarmAudio.currentTime = 0;
       }
       container.classList.remove('alarming');
-      remaining = originalTime;
+      endTime = Date.now() + originalTime * 1000;
       updateDisplay();
       resetBtn.style.display = 'none';
     } else {
@@ -78,17 +81,15 @@ function createTimer() {
         alert('Please enter a valid time.');
         return;
       }
-      remaining = originalTime;
+      endTime = Date.now() + originalTime * 1000;
       updateDisplay();
     }
 
     interval = setInterval(() => {
-      remaining--;
-      updateDisplay();
+      const remaining = updateDisplay();
       if (remaining <= 0) {
         clearInterval(interval);
         interval = null;
-        updateDisplay();
 
         const soundUrl = alarmSounds[Math.floor(Math.random() * alarmSounds.length)];
         alarmAudio = new Audio(soundUrl);
